@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "businessos-core"
+version = "0.1.0"
+description = "A safety-first, testable starter for autonomous business-agent research"
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [{name = "BusinessOS Contributors"}]
+dependencies = []
+
+[project.scripts]
+businessos = "businessos.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+businessos = ["py.typed"]

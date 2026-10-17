@@ -1,0 +1,29 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install local project
+        run: python -m pip install --no-deps -e .
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Run offline demonstration
+        run: |
+          businessos demo --db /tmp/businessos-demo.sqlite3 --output /tmp/businessos-out
+          businessos status --db /tmp/businessos-demo.sqlite3
