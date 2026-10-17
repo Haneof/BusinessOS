@@ -66,3 +66,18 @@ Everything committed here is public. Never include `.env`, real customer records
 - [GitHub setup](docs/GITHUB_SETUP.md)
 
 No source license is assigned yet. Public readability is not the same as open-source reuse rights; the repository owner should explicitly select a license before accepting outside code contributions.
+
+## Experimental Raven and EverOS protocol integration
+
+See [Raven + EverOS integration](docs/RAVEN_EVEROS.md). Phase A includes
+loopback-only A2A and EverOS HTTP adapters with injected transport contracts
+for offline tests. No upstream runtime, model, spending authority or customer
+account is connected. The business engine stays in offline dry-run mode.
+
+```bash
+businessos integrations
+python -m unittest discover -s tests -v
+```
+
+Do **not** use these prototypes as proof of a secure real-world delegated
+agent. A trusted out-of-band approval broker and isolated executor are required.
