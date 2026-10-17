@@ -23,11 +23,17 @@ def parser() -> argparse.ArgumentParser:
     policy.add_argument("action")
     policy.add_argument("--cost-cents", type=int, default=0)
     policy.add_argument("--budget-cents", type=int, default=0)
+    sub.add_parser("integrations", help="Show experimental integrations without contacting services")
     return p
 
 
 def main(argv: list[str] | None = None) -> int:
     args = parser().parse_args(argv)
+    if args.cmd == "integrations":
+        print(json.dumps({"raven_a2a": "disabled_by_default", "everos_memory": "disabled_by_default",
+                          "status": "PROTOCOL_ADAPTERS_ONLY", "live_agent_verified": False,
+                          "external_authority": "NOT_CONFIGURED"}, indent=2))
+        return 0
     if args.cmd == "demo":
         result = DemoEngine(Store(args.db), Policy(), Path(args.output)).run()
         print(json.dumps({"mode": result["mode"], "samples": len(result["candidates"]),

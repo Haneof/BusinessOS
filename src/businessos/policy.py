@@ -13,6 +13,8 @@ class Action(str, Enum):
     RUN_LOCAL_TEST = "run_local_test"
     DRAFT_PROPOSAL = "draft_proposal"
     SPAWN_SCOPED_AGENT = "spawn_scoped_agent"
+    DELEGATE_EXTERNAL_AGENT = "delegate_external_agent"
+    WRITE_EXTERNAL_MEMORY = "write_external_memory"
     INSTALL_SOFTWARE = "install_software"
     PUBLISH_EXTERNAL = "publish_external"
     CONTACT_CUSTOMER = "contact_customer"
@@ -75,6 +77,8 @@ class Policy:
             Action.REGISTER_ACCOUNT,
             Action.SPEND_MONEY,
             Action.ACCESS_CUSTOMER_DATA,
+            Action.DELEGATE_EXTERNAL_AGENT,
+            Action.WRITE_EXTERNAL_MEMORY,
         }:
             return Result(Decision.REQUIRE_APPROVAL, "Requires out-of-band authorization")
 
